@@ -1,16 +1,14 @@
-import React from 'react'
+import React from 'react';
 import {
     BrowserRouter, Route, Switch
-  } from "react-router-dom";
-import HomeWorld from './components/HomeWorld';
-import StarWars from './components/StarWars'
+} from "react-router-dom";
 
 const App: React.FC = () => {
     return <>
         <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={StarWars}></Route>
-                <Route path="/homeworld/:id" component={HomeWorld}></Route>
+                {<Route exact path="/" component={Home}></Route>}
+                {/* {<Route exact path="/"></Route>} */}
             </Switch>
         </BrowserRouter>
     </>
