@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { CharacterTable } from './Home'
-import { Character, CharacterResponse } from './model/Character'
-import starWarsService from './services/StarWarsService'
+import React, {  } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Home } from './Home'
+import { HomeWorldWiew } from './HomeWorld'
 
 const App: React.FC = () => {
 
-    const[characters, setCharacters] = useState<Character[]>([])
-
-    useEffect(() => {
-        (async () => {
-            const characters: CharacterResponse = await starWarsService.getAllPeople()
-            setCharacters(characters.results)
-        })()
-    }, [])
-
     return <>
-        <h2>List of Characters</h2>
-        <CharacterTable characters={characters} />
+        <BrowserRouter>
+            <Switch>
+                <Route exact path={"/"}>
+                    <Home />
+                </Route>
+                <Route path={"/homeworld/:id"}>
+                    <HomeWorldWiew />
+                </Route>
+            </Switch>
+        </BrowserRouter>
     </>
 
 }

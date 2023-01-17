@@ -1,16 +1,22 @@
-import { Character } from "../model/Character"
-import { CharacterTableHeader, CharacterTableBody } from "./CharacterTable"
+import React, { useEffect, useState } from 'react'
+import { Character, CharacterResponse } from '../model/Character'
+import starWarsService from '../services/StarWarsService'
+import { CharacterTable } from './CharacterTable'
 
-interface CharacterTableProps {
-    characters: Character[]
-}
+export const Home: React.FC = () => {
 
-export const CharacterTable: React.FC<CharacterTableProps> = (props) => {
+    const[characters, setCharacters] = useState<Character[]>([])
+
+    useEffect(() => {
+        (async () => {
+            const characters: CharacterResponse = await starWarsService.getAllPeople()
+            setCharacters(characters.results)
+        })()
+    }, [])
 
     return <>
-        <table>
-            <CharacterTableHeader />
-            <CharacterTableBody {...props} />
-        </table>
+        <h2>List of Characters</h2>
+        <CharacterTable characters={characters} />
     </>
+
 }
